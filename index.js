@@ -6,15 +6,18 @@ const mongoose = require('mongoose');
 const { expressMiddleware } = require('@apollo/server/express4');
 const userSchema = require('./Schema/userSchema');
 const userResolver = require('./Resolvers/userResolver');
+const postResolver = require('./Resolvers/postResolver')
 const User = require('./Models/userModel');
+const Post = require('./Models/postModel')
+const postSchema = require('./Schema/postSchema');
 require('dotenv').config();
 
 async function startServer() {
   const app = express();
   const server = new ApolloServer({
-    typeDefs: [userSchema],
-    resolvers: [userResolver],
-    context: () => ({ User }),
+    typeDefs: [userSchema, postSchema],
+    resolvers: [userResolver, postResolver],
+    context: () => ({ User, Post }),
   });
 
   app.use(bodyParser.json());

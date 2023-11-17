@@ -14,8 +14,7 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
   },
-  // Other post-related fields
-});
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
 
